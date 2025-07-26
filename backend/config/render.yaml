@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: inventorix-api
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn config.wsgi --log-file -"
+    envVars:
+      - key: django-insecure-#m(p-%o#ge!f&ro#%zc!gsv7&#izkxdytlz*xy28jl8wdh&w66
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: inventorix-api.onrender.com
+
