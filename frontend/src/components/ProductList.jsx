@@ -95,9 +95,6 @@ export default function ProductList({ setNotification, searchQuery, darkMode }) 
               }`}>Nom</th>
               <th className={`px-4 py-3 text-left border-b sticky top-0 ${
                 darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-200'
-              }`}>Catégorie</th>
-              <th className={`px-4 py-3 text-left border-b sticky top-0 ${
-                darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-200'
               }`}>Prix</th>
               <th className={`px-4 py-3 text-left border-b sticky top-0 ${
                 darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-200'
@@ -117,11 +114,6 @@ export default function ProductList({ setNotification, searchQuery, darkMode }) 
                   darkMode ? 'border-gray-600' : 'border-gray-200'
                 }`}>
                   {product.name}
-                </td>
-                <td className={`px-4 py-3 border-b align-middle whitespace-nowrap ${
-                  darkMode ? 'border-gray-600' : 'border-gray-200'
-                }`}>
-                  {product.category?.name || '-'}
                 </td>
                 <td className={`px-4 py-3 border-b align-middle whitespace-nowrap ${
                   darkMode ? 'border-gray-600' : 'border-gray-200'

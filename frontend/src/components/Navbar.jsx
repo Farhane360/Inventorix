@@ -4,7 +4,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
   return (
     <nav className="flex justify-between items-center mt-6 px-4">
       <div className={`${darkMode ? 'bg-gray-800 text-green-400' : 'bg-white text-green-600'} shadow-md rounded-full px-8 py-3`}>
-        <h1 className="text-xl font-bold">Inventorix</h1>
+        <a href="#"><h1 className="text-xl font-bold">Inventorix</h1></a>
       </div>
       <button
         onClick={() => setDarkMode(!darkMode)}

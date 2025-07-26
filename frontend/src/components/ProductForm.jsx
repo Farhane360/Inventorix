@@ -156,7 +156,7 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
               type="submit" 
               disabled={isSubmitting}
               className={`px-4 py-2 text-white rounded cursor-pointer ${
-                isSubmitting ? 'bg-blue-300' : 'bg-blue-600 hover:bg-blue-700'
+                isSubmitting ? 'bg-green-300' : 'bg-green-600 hover:bg-green-700'
               }`}
             >
               {isSubmitting ? 'En cours...' : (productToEdit ? 'Modifier' : 'Enregistrer')}
