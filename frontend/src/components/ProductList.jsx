@@ -55,8 +55,7 @@ export default function ProductList({ setNotification, searchQuery, darkMode }) 
   // Filtrer les produits
   useEffect(() => {
     const filtered = products.filter(product => 
-      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (product.category && product.category.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
     setFilteredProducts(filtered)
   }, [searchQuery, products])

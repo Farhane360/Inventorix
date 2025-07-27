@@ -5,33 +5,21 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
   const [formData, setFormData] = useState({
     name: '',
     quantity: '',
-    category: '',
     description: '',
     price: ''
   });
-  const [categories, setCategories] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Initialiser les valeurs si en mode édition
   useEffect(() => {
     if (productToEdit) {
       setFormData({
         name: productToEdit.name,
         quantity: productToEdit.quantity,
-        category: productToEdit.category?.id || '',
         description: productToEdit.description,
         price: productToEdit.price
       });
     }
   }, [productToEdit]);
-
-  // Charger les catégories
-  useEffect(() => {
-    fetch('http://localhost:8000/api/categories/')
-      .then(res => res.json())
-      .then(data => setCategories(data))
-      .catch(err => console.error('Erreur:', err));
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,8 +45,7 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
         body: JSON.stringify({
           ...formData,
           quantity: Number(formData.quantity),
-          price: Number(formData.price),
-          category_id: formData.category || null
+          price: Number(formData.price)
         }),
       });
 
@@ -79,15 +66,15 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-      <div className="bg-white w-full max-w-md p-6 rounded-lg relative">
+      <div className="bg-white dark:bg-gray-800 w-full max-w-md p-6 rounded-lg relative">
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 cursor-pointer"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white cursor-pointer"
         >
           <FaTimes size={20} />
         </button>
 
-        <h2 className="text-xl font-semibold mb-4">
+        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
           {productToEdit ? 'Modifier le produit' : 'Ajouter un produit'}
         </h2>
 
@@ -98,7 +85,7 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
             placeholder="Nom du produit"
             value={formData.name}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             required
           />
           
@@ -108,21 +95,9 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
             placeholder="Quantité"
             value={formData.quantity}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             required
           />
-          
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-          >
-            <option value="">-- Choisir une catégorie --</option>
-            {categories.map(cat => (
-              <option key={cat.id} value={cat.id}>{cat.name}</option>
-            ))}
-          </select>
           
           <input
             type="number"
@@ -131,7 +106,7 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
             placeholder="Prix"
             value={formData.price}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             required
           />
           
@@ -140,7 +115,7 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
             placeholder="Description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             required
           />
 
@@ -148,7 +123,7 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
             <button 
               type="button" 
               onClick={onClose}
-              className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 cursor-pointer"
+              className="px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 rounded cursor-pointer text-gray-800 dark:text-white"
             >
               Annuler
             </button>
@@ -156,7 +131,7 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
               type="submit" 
               disabled={isSubmitting}
               className={`px-4 py-2 text-white rounded cursor-pointer ${
-                isSubmitting ? 'bg-green-300' : 'bg-green-600 hover:bg-green-700'
+                isSubmitting ? 'bg-green-300 dark:bg-green-500' : 'bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600'
               }`}
             >
               {isSubmitting ? 'En cours...' : (productToEdit ? 'Modifier' : 'Enregistrer')}
