@@ -10,6 +10,8 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
   useEffect(() => {
     if (productToEdit) {
       setFormData({
@@ -32,8 +34,8 @@ export default function ProductForm({ onClose, onSuccess, productToEdit }) {
 
     try {
       const url = productToEdit 
-        ? `http://localhost:8000/api/products/${productToEdit.id}/`
-        : 'http://localhost:8000/api/products/';
+        ? `${API_URL}/api/products/${productToEdit.id}/`
+        : `${API_URL}/api/products/`;
       
       const method = productToEdit ? 'PUT' : 'POST';
 
